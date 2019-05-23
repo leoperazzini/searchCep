@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 
-import Login from "./components/login/formLogin";
+import Login from "./components/form/formLogin";
 import Navigation from "./navigation/navigation";
 
 import { Root } from "native-base";

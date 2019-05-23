@@ -7,7 +7,7 @@ import {
 import React from "react";
 
 import MainScreen from "../components/main/main";
-import FormLogin from "../components/login/formLogin";
+import FormLogin from "../components/form/formLogin";
 
 import CustomDrawerContentComponent from "./customDrawer";
 
