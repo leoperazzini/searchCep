@@ -1,6 +1,6 @@
 import React from "react";
 
-import { login } from "../../actions/loginAction.js";
+import { login } from "../../actions/formAction.js";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";

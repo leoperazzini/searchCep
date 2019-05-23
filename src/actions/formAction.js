@@ -17,47 +17,34 @@ export const login = data_form => (dispatch, getState) => {
 
   //alert(JSON.stringify(data_form));
 
-  /* api
-    .post("/login", data_form)
-    .then(function(response) {
-      error = response.data.error;
-      access_token = response.data.access_token;
-      token_type = response.data.token_type;
+  // try {
+  //   let alertsAlreadyNotificated = await AsyncStorage.getItem(
+  //     "alertsAlreadyNotificated"
+  //   );
 
-      if (error === undefined) {
-        error = { email: null, password: null };
-      }
-    })
-    .catch(function(err) {
-      error = { erro_servidor: "Não foi possível conectar com o servidor." };
-    })
-    .finally(function() {
-      if (
-        access_token != undefined &&
-        access_token != null &&
-        access_token != ""
-      ) {
-        AsyncStorage.setItem("access_token", access_token);
-        AsyncStorage.setItem("token_type", token_type);
-      } else {
-        if (error == "invalid_credentials") {
-          Toast.show({
-            text: "E-mail ou senha inválidos!",
-            textStyle: { color: "white", textAlign: "center" },
-            style: {
-              backgroundColor: "#FF2929",
-              borderRadius: 35,
-              alignSelf: "center",
-              width: width - 100,
-              bottom: 20
-            },
-            duration: 5000,
-            position: "bottom"
-          });
-          error = {};
-        }
-      }
-    }); */
+  //   alertsAlreadyNotificated = JSON.parse(alertsAlreadyNotificated);
+  //   //console.log(alertsAlreadyNotificated);
+  //   const response = await api().request({
+  //     url: "/alert/recievelocationbydevice",
+  //     method: "POST",
+  //     data: {
+  //       latitude: latitude,
+  //       longitude: longitude,
+  //       userIdOneSignal: userIdOneSignal,
+  //       alertsAlreadyNotificated: alertsAlreadyNotificated
+  //     }
+  //   });
+
+  //   AsyncStorage.setItem(
+  //     "alertsAlreadyNotificated",
+  //     JSON.stringify(response.data)
+  //   );
+  // } catch (err) {
+  //   console.log("errors", err);
+  // }
+
+  // GOOGLE_MAPS_KEY=AIzaSyD7-u2fXJQ58t_8qswX1ZssssE_N9fE7IQ
+
   var access_token = "1";
 
   dispatch({ type: LOGIN, payload: access_token });
