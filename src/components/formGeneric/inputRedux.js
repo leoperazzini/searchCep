@@ -69,17 +69,6 @@ export default class inputRedux extends PureComponent {
               style={[style, {}]}
               theme={theme}
             />
-            <View style={styles.iconRight}>
-              {this.props.secureTextEntry && (
-                <IconButton
-                  icon={this.state.passIcon}
-                  color={this.state.errorColor}
-                  onPress={() => {
-                    this.showHide();
-                  }}
-                />
-              )}
-            </View>
           </View>
 
           <HelperText type="error" visible={hasError}>

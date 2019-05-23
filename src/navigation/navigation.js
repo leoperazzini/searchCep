@@ -13,8 +13,6 @@ import CustomDrawerContentComponent from "./customDrawer";
 
 import { Dimensions, Animated, Easing } from "react-native";
 
-import { fromTop, fromRight } from "react-navigation-transitions";
-
 const { width, height } = Dimensions.get("window");
 
 const LoginNavigation = createStackNavigator(
@@ -22,19 +20,9 @@ const LoginNavigation = createStackNavigator(
     ScreenLogin: { screen: FormLogin }
   },
   {
-    headerMode: "none",
-    transitionConfig: () => fromTop(500)
-  }
-);
-
-/* const AuthLoadingNavigation = createStackNavigator(
-  {
-    AuthLoadingScreen: { screen: AuthLoading }
-  },
-  {
     headerMode: "none"
   }
-); */
+);
 
 const MainTabNavigator = createDrawerNavigator(
   {
@@ -53,7 +41,6 @@ export default createAppContainer(
     {
       Login: LoginNavigation,
       Main: MainTabNavigator
-      //Auth: AuthLoadingNavigation
     },
     {
       initialRouteName: "Login"
