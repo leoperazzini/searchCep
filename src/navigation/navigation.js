@@ -8,6 +8,7 @@ import React from "react";
 
 import MainScreen from "../components/main/main";
 import FormLogin from "../components/form/formLogin";
+import FormCadastrar from "../components/form/formCadastrar";
 
 import CustomDrawerContentComponent from "./customDrawer";
 
@@ -17,7 +18,8 @@ const { width, height } = Dimensions.get("window");
 
 const LoginNavigation = createStackNavigator(
   {
-    ScreenLogin: { screen: FormLogin }
+    ScreenLogin: { screen: FormLogin },
+    ScreenCadastrar: { screen: FormCadastrar }
   },
   {
     headerMode: "none"

@@ -26,7 +26,12 @@ class formLogin extends React.Component {
     super(props);
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    const { logged } = this.props;
+    if (logged) {
+      this.props.navigation.navigate("MainScreen");
+    }
+  }
 
   render() {
     const { login, submitting, handleSubmit } = this.props;
@@ -62,7 +67,9 @@ class formLogin extends React.Component {
                   style={styles.buttons}
                   mode="contained"
                   color="#050913"
-                  onPress={() => alert()}
+                  onPress={() =>
+                    this.props.navigation.navigate("ScreenCadastrar")
+                  }
                 >
                   CADASTRAR
                 </Button>
@@ -98,7 +105,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  access_token: state.user.access_token
+  logged: state.userReducer.logged
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ login }, dispatch);

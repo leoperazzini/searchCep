@@ -1,12 +1,7 @@
 import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { ScrollView, StyleSheet, View, TouchableOpacity } from "react-native";
 
-import { AsyncStorage } from "react-native";
-
-import { Fab } from "native-base";
-
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { logout } from "../actions/formAction";
 
 import { IconButton, Text } from "react-native-paper";
 
@@ -18,114 +13,43 @@ class CustomDrawerContentComponent extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 2 }}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "black",
-            borderBottomColor: "black",
-            borderBottomWidth: 1,
-            flexDirection: "row"
+      <View
+        style={{
+          flex: 1
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate("MainScreen");
+            this.props.navigation.closeDrawer();
           }}
         >
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <IconButton
-              icon="person"
-              color="white"
-              size={30}
-              style={{
-                borderWidth: 1,
-                borderColor: "white",
-                borderStyle: "solid",
-                width: "80%",
-                height: "40%",
-                borderWidth: 1,
-                borderRadius: 100
-              }}
-            />
-          </View>
-          <View
-            style={{
-              flex: 3,
-              flexDirection: "column"
-            }}
-          >
-            <View
-              style={{
-                flex: 1
-              }}
-            />
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
-              <Text
-                style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
-              >
-                Leonardo Perazzini
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 2,
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
-              <Text style={{ color: "white", fontSize: 15, marginTop: 10 }}>
-                Credibilidade : 5
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 1
-              }}
-            />
-          </View>
-        </View>
+          <Text style={{ fontSize: 20, marginTop: 20, marginLeft: 20 }}>
+            Listar usuários
+          </Text>
+        </TouchableOpacity>
 
-        <View
-          style={{
-            flex: 3
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate("ScreenSearchCEP");
+            this.props.navigation.closeDrawer();
           }}
         >
-          <Text
-            style={{ fontSize: 20, marginTop: 20, marginLeft: 20 }}
-            onPress={() => alert()}
-          >
-            Meu perfil
+          <Text style={{ fontSize: 20, marginTop: 20, marginLeft: 20 }}>
+            Buscar CEP
           </Text>
+        </TouchableOpacity>
 
-          <Text
-            style={{ fontSize: 20, marginTop: 20, marginLeft: 20 }}
-            onPress={() => alert()}
-          >
-            Meus dados
-          </Text>
-
-          <Text
-            style={{ fontSize: 20, marginTop: 20, marginLeft: 20 }}
-            onPress={() => alert()}
-          >
-            Ajuda
-          </Text>
-
-          <Text
-            style={{ fontSize: 20, marginTop: 20, marginLeft: 20 }}
-            onPress={() => alert()}
-          >
+        <TouchableOpacity
+          onPress={() => {
+            this.props.logout();
+            this.props.navigation.navigate("ScreenLogin");
+          }}
+        >
+          <Text style={{ fontSize: 20, marginTop: 20, marginLeft: 20 }}>
             Sair
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -151,7 +75,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ logout }, dispatch);
 
 export default connect(
   mapStateToProps,

@@ -3,7 +3,7 @@ import userReducer from "./userReducer";
 import { reducer as formReducer } from "redux-form";
 
 const allReducers = combineReducers({
-  user: userReducer,
+  userReducer,
   form: formReducer
 });
 

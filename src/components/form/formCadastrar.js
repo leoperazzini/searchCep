@@ -1,6 +1,6 @@
 import React from "react";
 
-import { login } from "../../actions/formAction.js";
+import { cadastrar } from "../../actions/formAction.js";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -21,7 +21,7 @@ import InputRedux from "../formGeneric/inputRedux";
 
 const { width, height } = Dimensions.get("window");
 
-class formLogin extends React.Component {
+class formCadastrar extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -29,7 +29,7 @@ class formLogin extends React.Component {
   componentDidUpdate() {}
 
   render() {
-    const { login, submitting, handleSubmit } = this.props;
+    const { cadastrar, submitting, handleSubmit } = this.props;
     return (
       <ImageBackground style={[styles.backgroundImg]}>
         <ScrollView keyboardShouldPersistTaps="handled">
@@ -41,6 +41,9 @@ class formLogin extends React.Component {
             <Card.Content>
               <View>
                 <Field name="username" label="Usuário" component={InputRedux} />
+
+                <Field name="email" label="E-mail" component={InputRedux} />
+
                 <Field
                   name="password"
                   secureTextEntry
@@ -53,18 +56,20 @@ class formLogin extends React.Component {
                   style={styles.buttons}
                   mode="contained"
                   color="#050913"
-                  onPress={handleSubmit(login)}
+                  onPress={handleSubmit(cadastrar)}
                   loading={submitting}
                 >
-                  ENTRAR
+                  CADASTRAR
                 </Button>
+              </View>
+              <View>
                 <Button
                   style={styles.buttons}
                   mode="contained"
                   color="#050913"
-                  onPress={() => alert()}
+                  onPress={() => this.props.navigation.navigate("ScreenLogin")}
                 >
-                  CADASTRAR
+                  VOLTAR
                 </Button>
               </View>
             </Card.Content>
@@ -97,15 +102,14 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
-  access_token: state.user.access_token
-});
+const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators({ login }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ cadastrar }, dispatch);
 
-formLogin = connect(
+formCadastrar = connect(
   mapStateToProps,
   mapDispatchToProps
-)(formLogin);
+)(formCadastrar);
 
-export default reduxForm({ form: "formLogin" })(formLogin);
+export default reduxForm({ form: "formCadastrar" })(formCadastrar);

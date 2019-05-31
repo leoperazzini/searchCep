@@ -1,13 +1,18 @@
-import { LOGIN } from "../consts/actions";
+import { LOGIN, CADASTRAR, SETUSERS } from "../consts/actions";
 
 const INITIAL_STATE = {
-  access_token: ""
+  users: [],
+  logged: false
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOGIN:
-      return { ...state, access_token: action.payload };
+      return { ...state, logged: action.payload };
+    case CADASTRAR:
+      return { ...state, users: [...state.users, action.payload] };
+    case SETUSERS:
+      return { ...state, users: action.payload };
   }
 
   return state;
