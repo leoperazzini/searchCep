@@ -7,6 +7,8 @@ import {
 import React from "react";
 
 import MainScreen from "../components/main/main";
+import searchCep from "../components/searchCep/searchCep";
+
 import FormLogin from "../components/form/formLogin";
 import FormCadastrar from "../components/form/formCadastrar";
 
@@ -28,6 +30,7 @@ const LoginNavigation = createStackNavigator(
 
 const MainTabNavigator = createDrawerNavigator(
   {
+    ScreenSearchCEP: { screen: searchCep },
     MainScreen: { screen: MainScreen }
   },
   {
@@ -45,7 +48,7 @@ export default createAppContainer(
       Main: MainTabNavigator
     },
     {
-      initialRouteName: "Login"
+      initialRouteName: "Main"
     }
   )
 );

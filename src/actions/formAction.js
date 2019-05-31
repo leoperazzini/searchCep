@@ -19,6 +19,7 @@ export const cadastrar = data_form => async (dispatch, getState) => {
   if (users) {
     dispatch({ type: SETUSERS, payload: users });
   } else {
+    users = [];
     dispatch({ type: SETUSERS, payload: [] });
   }
 
@@ -73,11 +74,15 @@ export const login = data_form => async (dispatch, getState) => {
   const user = ({ username, email, password } = data_form);
 
   if (user.username && user.password) {
-    const userLogin = users.find(function(item) {
-      return item.username == user.username;
-    });
-    if (userLogin && userLogin.password == user.password) {
-      dispatch({ type: LOGIN, payload: true });
+    if (users) {
+      const userLogin = users.find(function(item) {
+        return item.username == user.username;
+      });
+      if (userLogin && userLogin.password == user.password) {
+        dispatch({ type: LOGIN, payload: true });
+      } else {
+        alert("Senha ou usuário incorretos");
+      }
     } else {
       alert("Senha ou usuário incorretos");
     }
