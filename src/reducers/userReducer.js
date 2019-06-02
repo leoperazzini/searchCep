@@ -1,8 +1,18 @@
-import { LOGIN, CADASTRAR, SETUSERS } from "../consts/actions";
+import {
+  LOGIN,
+  CADASTRAR,
+  SETUSERS,
+  SETFORMATTEDADRESS,
+  SETCEP,
+  SETDISPLAY
+} from "../consts/actions";
 
 const INITIAL_STATE = {
   users: [],
-  logged: false
+  logged: false,
+  formatted_address: "",
+  cep: "",
+  display: "auto"
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -13,6 +23,12 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, users: [...state.users, action.payload] };
     case SETUSERS:
       return { ...state, users: action.payload };
+    case SETFORMATTEDADRESS:
+      return { ...state, formatted_address: action.payload };
+    case SETCEP:
+      return { ...state, cep: action.payload };
+    case SETDISPLAY:
+      return { ...state, display: action.payload };
   }
 
   return state;

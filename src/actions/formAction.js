@@ -1,10 +1,19 @@
 import AsyncStorage from "@react-native-community/async-storage";
 
-import { LOGIN, CADASTRAR, SETUSERS } from "../consts/actions";
+import {
+  LOGIN,
+  CADASTRAR,
+  SETUSERS,
+  SETFORMATTEDADRESS,
+  SETCEP,
+  SETDISPLAY
+} from "../consts/actions";
 
 import { startSubmit, stopSubmit } from "redux-form";
 
 import { Toast } from "native-base";
+
+import axios from "axios";
 
 const dismissKeyboard = require("dismissKeyboard");
 
@@ -100,6 +109,50 @@ export const login = data_form => async (dispatch, getState) => {
 
 export const logout = () => async (dispatch, getState) => {
   dispatch({ type: LOGIN, payload: false });
+};
+
+export const setListViewDisplayed = display => async (dispatch, getState) => {
+  dispatch({ type: SETDISPLAY, payload: display });
+};
+
+export const getCEP = (lat, long) => async (dispatch, getState) => {
+  //https://maps.google.com/maps/api/geocode/json?address=-22.968159,-43.3935154&sensor=false&key=AIzaSyD7-u2fXJQ58t_8qswX1ZssssE_N9fE7IQ
+
+  try {
+    const response = await axios.get(
+      `https://maps.google.com/maps/api/geocode/json?address=${lat},${long}&sensor=false&key=AIzaSyD7-u2fXJQ58t_8qswX1ZssssE_N9fE7IQ`
+    );
+
+    let results = response.data.results;
+
+    // pegando o primeiro resultado vindo do maps
+
+    let ret = results.find(function(item, key) {
+      return key == 0;
+    });
+
+    // pegando o endereço completo
+
+    dispatch({
+      type: SETFORMATTEDADRESS,
+      payload: ret.formatted_address
+    });
+
+    // pegando o cep
+
+    let retcep = ret.address_components.find(function(item, key) {
+      return item.types == "postal_code";
+    });
+
+    dispatch({
+      type: SETCEP,
+      payload: retcep.long_name
+    });
+  } catch (error) {
+    alert(JSON.stringify(error));
+  }
+
+  //dispatch({ type: LOGIN, payload: false });
 };
 
 //alert(JSON.stringify(data_form));

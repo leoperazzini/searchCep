@@ -30,8 +30,8 @@ const LoginNavigation = createStackNavigator(
 
 const MainTabNavigator = createDrawerNavigator(
   {
-    ScreenSearchCEP: { screen: searchCep },
-    MainScreen: { screen: MainScreen }
+    MainScreen: { screen: MainScreen },
+    ScreenSearchCEP: { screen: searchCep }
   },
   {
     contentComponent: CustomDrawerContentComponent,
@@ -48,7 +48,7 @@ export default createAppContainer(
       Main: MainTabNavigator
     },
     {
-      initialRouteName: "Main"
+      initialRouteName: "Login"
     }
   )
 );

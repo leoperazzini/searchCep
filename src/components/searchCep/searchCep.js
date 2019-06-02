@@ -8,7 +8,9 @@ import {
 
 import { View } from "native-base";
 
-import { IconButton, ActivityIndicator } from "react-native-paper";
+import { getCEP, setListViewDisplayed } from "../../actions/formAction";
+
+import { IconButton, ActivityIndicator, Text } from "react-native-paper";
 
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
@@ -78,26 +80,24 @@ class searchCep extends React.Component {
           placeholder="Buscar endereço"
           minLength={2} // minimum length of text to search
           autoFocus={false}
-          listViewDisplayed="auto" // true/false/undefined
+          listViewDisplayed={this.props.display} // true/false/undefined
           fetchDetails={true}
           textInputProps={{
             onChangeText: text => {
               //this.props.setAdressAutoComplete(null, null, "");
-              //this.props.setListViewDisplayed("auto");
+              this.props.setListViewDisplayed("auto");
             },
             onFocus: () => {
-              //this.props.setListViewDisplayed("auto");
+              this.props.setListViewDisplayed("auto");
             }
           }}
           onPress={(data, details = null) => {
-            // 'details' is provided when fetchDetails = true
-            //alert(JSON.stringify(details));
-            console.log(details);
+            let latAdress = details.geometry.location.lat;
+            let lngAdress = details.geometry.location.lng;
 
-            //let latAdress = details.geometry.location.lat;
-            //let lngAdress = details.geometry.location.lng;
+            this.props.getCEP(latAdress, lngAdress);
 
-            //this.props.setListViewDisplayed("false");
+            this.props.setListViewDisplayed("false");
 
             //this.props.setAdressAutoComplete(latAdress, lngAdress, "");
 
@@ -139,6 +139,26 @@ class searchCep extends React.Component {
             </View>
           )}
         />
+        <Text />
+        <Text />
+        <Text />
+        <Text />
+        <Text />
+
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          {this.props.cep != "" && (
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ fontWeight: "bold", fontSize: 20 }}>CEP: </Text>
+              <Text style={{ fontSize: 20 }}>{this.props.cep}</Text>
+            </View>
+          )}
+          <Text />
+          {this.props.formatted_address != "" && (
+            <Text style={{ fontSize: 13, textAlign: "center" }}>
+              {this.props.formatted_address}
+            </Text>
+          )}
+        </View>
       </View>
     );
   }
@@ -159,9 +179,14 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  cep: state.userReducer.cep,
+  formatted_address: state.userReducer.formatted_address,
+  display: state.userReducer.display
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getCEP, setListViewDisplayed }, dispatch);
 
 export default connect(
   mapStateToProps,
